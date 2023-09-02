@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   const renderMovieCards = (container, movies) => {
     container.innerHTML = '';
     movies.forEach(movie => {
-      console.log(movie);  
       const isFavorite = favoriteMovies.some(favMovie => favMovie.title === movie.title);
       const card = `
         <div class="card">
@@ -27,9 +26,8 @@ document.addEventListener('DOMContentLoaded', async () => {
       container.insertAdjacentHTML('beforeend', card);
     });
   };
-
-
-  const fantasyContainer = document.getElementById('fantasyMovies');
+  
+    const fantasyContainer = document.getElementById('fantasyMovies');
   const animatedContainer = document.getElementById('animatedMovies');
   const favoriteContainer = document.getElementById('favoriteMovies');
 
@@ -45,6 +43,11 @@ document.addEventListener('DOMContentLoaded', async () => {
       if (!isFavorite) {
         const movie = { title: movieTitle };
         favoriteMovies.push(movie);
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Película agregada a favoritos con éxito',
+        })
       } else {
         const index = favoriteMovies.findIndex(movie => movie.title === movieTitle);
         favoriteMovies.splice(index, 1);
